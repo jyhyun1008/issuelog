@@ -334,7 +334,7 @@ if (!page && !category && !article) {
 
         console.log(result)
 
-        document.querySelector("#page_content").innerHTML += "<div><a href='./?cat="+result.labels[0].name+"' class='nodeco'><span class='category' style='background-color: #"+result.labels[0].color+"; color: white;'>"+result.labels[0].name+"</span></a></div><div class='datetime'>"+result.created_at+"</div><div id='blogbody'></div><div id='blogcomments'></div>"
+        document.querySelector("#page_content").innerHTML += "<div><a href='./?cat="+result.labels[0].name+"' class='nodeco'><span class='category' style='background-color: #"+result.labels[0].color+"; color: white;'>"+result.labels[0].name+"</span></a></div><div><p></p></div><div class='datetime'>"+result.created_at+"</div><div id='blogbody'></div><div id='blogcomments'></div>"
         document.querySelector("#blogbody").innerHTML += parseMd(result.body)
     })
 } else if (page) {
