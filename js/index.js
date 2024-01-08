@@ -321,7 +321,7 @@ if (!page && !category && !article) {
         for (let i = 0; i < filteredResults.length; i++) {
             var coverimg = filteredResults[i].body.split("![")[1].split("](")[1].split(")")[0]
             document.querySelector("#page_content").innerHTML += "<div class='postlist'><div class='coverimg' id='cover"+i+"'><a href='./?a="+filteredResults[i].number+"' class='nodeco'><img class='width200' src='"+coverimg+"'></a></div><div class='posttext' id='post"+i+"'></div><div>"
-            document.querySelector("#post"+i).innerHTML += "<h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2><div class='description'>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div><div class='datetime'>"+filteredResults[i].created_at+"</div>"
+            document.querySelector("#post"+i).innerHTML += "<a href='./?a="+filteredResults[i].number+"' class='nodeco'><h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2></ㅁ><div class='description'>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div><div class='datetime'>"+filteredResults[i].created_at+"</div>"
         }
     })
 } else if (article) {
