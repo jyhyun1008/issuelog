@@ -79,3 +79,12 @@ body {
 .covercolor {
     width: 10px;
 }
+
+.description {
+    margin: 20px 0;
+}
+
+.datetime {
+    color: gray;
+    font-size: 0.85em;
+}

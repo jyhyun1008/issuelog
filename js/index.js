@@ -268,9 +268,9 @@ if (!page && !category && !article) {
             var coverimg = results[i].body.split("![")[1].split("](")[1].split(")")[0]
             document.querySelector("#page_content").innerHTML += "<div class='postlist'><div class='coverimg' id='cover"+i+"'><a href='./?a="+results[i].number+"' class='nodeco'><img class='width200' src='"+coverimg+"'></a></div><div class='posttext' id='post"+i+"'></div><div>"
             if (results[i].labels.length > 0) {
-                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+results[i].number+"' class='nodeco'><h2>"+results[i].title+" ("+results[i].comments+")</h2></a><div><a href='./?cat="+results[i].labels[0].name+"' class='nodeco'><span class='category' style='background-color: #"+results[i].labels[0].color+"; color: white;'>"+results[i].labels[0].name+"</span></a></div><div>"+parsePlainText(results[i].body).substr(0, 100)+"...</div>"
+                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+results[i].number+"' class='nodeco'><h2>"+results[i].title+" ("+results[i].comments+")</h2></a><div><a href='./?cat="+results[i].labels[0].name+"' class='nodeco'><span class='category' style='background-color: #"+results[i].labels[0].color+"; color: white;'>"+results[i].labels[0].name+"</span></a></div><div class='description'>"+parsePlainText(results[i].body).substr(0, 100)+"...</div><div class='datetime'>"+results[i].created_at+"</div>"
             } else {
-                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+results[i].number+"' class='nodeco'><h2>"+results[i].title+" ("+results[i].comments+")</h2></a><div>"+parsePlainText(results[i].body).substr(0, 100)+"...</div>"
+                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+results[i].number+"' class='nodeco'><h2>"+results[i].title+" ("+results[i].comments+")</h2></a><div class='description'>"+parsePlainText(results[i].body).substr(0, 100)+"...</div><div class='datetime'>"+results[i].created_at+"</div>"
             }
         }
     })
@@ -284,7 +284,7 @@ if (!page && !category && !article) {
         var results = JSON.parse(out)
         for (let i = 0; i < results.length; i++) {
             document.querySelector("#page_content").innerHTML += "<div class='postlist'><div class='covercolor' style='background-color:#"+results[i].color+";'></div><div class='posttext' id='post"+i+"'></div><div>"
-            document.querySelector("#post"+i).innerHTML += "<a href='./?cat="+results[i].name+"' class='nodeco'><h2>"+results[i].name+"</h2></a><div>"+results[i].description+"</div>"
+            document.querySelector("#post"+i).innerHTML += "<a href='./?cat="+results[i].name+"' class='nodeco'><h2>"+results[i].name+"</h2></a><div class='description'>"+results[i].description+"</div>"
         }
     })
 } else if (category) {
@@ -307,7 +307,7 @@ if (!page && !category && !article) {
         console.log(filteredResults)
 
         for (let i = 0; i < filteredResults.length; i++) {
-            document.querySelector("#page_content").innerHTML += "<h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2><div>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div>"
+            document.querySelector("#page_content").innerHTML += "<h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2><div class='description'>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div><div class='datetime'>"+filteredResults[i].created_at+"</div>"
         }
     })
 } else if (article) {
@@ -320,7 +320,7 @@ if (!page && !category && !article) {
 
         console.log(result)
 
-        document.querySelector("#page_content").innerHTML += "<div id='blogbody'></div><div id='blogcomments'></div>"
+        document.querySelector("#page_content").innerHTML += "<div class='datetime'>"+result.created_at+"</div><div id='blogbody'></div><div id='blogcomments'></div>"
         document.querySelector("#blogbody").innerHTML += parseMd(result.body)
     })
 } else if (page) {
