@@ -292,7 +292,7 @@ if (!page && !category && !article) {
     fetch(url)
     .then(res => res.text())
     .then((out) => {
-        document.querySelector("#page_title").innerText = 'BLOG'
+        document.querySelector("#page_title").innerText = category
         var results = JSON.parse(out)
 
         function isInCategory(result) {
@@ -307,7 +307,7 @@ if (!page && !category && !article) {
         console.log(filteredResults)
 
         for (let i = 0; i < filteredResults.length; i++) {
-            document.querySelector("#page_content").innerHTML += "<h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2><div>"+parsePlainText(filteredResults[i]).body.substr(0, 100)+"...</div>"
+            document.querySelector("#page_content").innerHTML += "<h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2><div>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div>"
         }
     })
 } else if (article) {
