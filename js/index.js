@@ -247,6 +247,7 @@ var page = qs.p;
 //var signinHost = qs.h;
 var category = qs.cat;
 var article = qs.a;
+var index = qs.index;
 
 if (!page && !category && !article) {
     var url = "https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/README.md"
@@ -307,7 +308,9 @@ if (!page && !category && !article) {
         console.log(filteredResults)
 
         for (let i = 0; i < filteredResults.length; i++) {
-            document.querySelector("#page_content").innerHTML += "<h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2><div class='description'>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div><div class='datetime'>"+filteredResults[i].created_at+"</div>"
+            var coverimg = filteredResults[i].body.split("![")[1].split("](")[1].split(")")[0]
+            document.querySelector("#page_content").innerHTML += "<div class='postlist'><div class='coverimg' id='cover"+i+"'><a href='./?a="+filteredResults[i].number+"' class='nodeco'><img class='width200' src='"+coverimg+"'></a></div><div class='posttext' id='post"+i+"'></div><div>"
+            document.querySelector("#post"+i).innerHTML += "<h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2><div class='description'>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div><div class='datetime'>"+filteredResults[i].created_at+"</div>"
         }
     })
 } else if (article) {
