@@ -263,15 +263,24 @@ if (!page && !category && !article) {
     .then(res => res.text())
     .then((out) => {
         document.querySelector("#page_title").innerText = 'BLOG'
-        console.log(out)
         var results = JSON.parse(out)
-        for (let i = 0; i < results.length; i++) {
-            var coverimg = results[i].body.split("![")[1].split("](")[1].split(")")[0]
-            document.querySelector("#page_content").innerHTML += "<div class='postlist'><div class='coverimg' id='cover"+i+"'><a href='./?a="+results[i].number+"' class='nodeco'><img class='width200' src='"+coverimg+"'></a></div><div class='posttext' id='post"+i+"'></div><div>"
-            if (results[i].labels.length > 0) {
-                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+results[i].number+"' class='nodeco'><h2>"+results[i].title+" ("+results[i].comments+")</h2></a><div><a href='./?cat="+results[i].labels[0].name+"' class='nodeco'><span class='category' style='background-color: #"+results[i].labels[0].color+"; color: white;'>"+results[i].labels[0].name+"</span></a></div><div class='description'>"+parsePlainText(results[i].body).substr(0, 100)+"...</div><div class='datetime'>"+results[i].created_at+"</div>"
+
+        function isUserName(result) {
+            if (result.user.login == githubUserName) {
+                return true
+            }
+        }
+
+        filteredResults = results.filter(isUserName)
+        console.log(filteredResults)
+
+        for (let i = 0; i < filteredResults.length; i++) {
+            var coverimg = filteredResults[i].body.split("![")[1].split("](")[1].split(")")[0]
+            document.querySelector("#page_content").innerHTML += "<div class='postlist'><div class='coverimg' id='cover"+i+"'><a href='./?a="+filteredResults[i].number+"' class='nodeco'><img class='width200' src='"+coverimg+"'></a></div><div class='posttext' id='post"+i+"'></div><div>"
+            if (filteredResults[i].labels.length > 0) {
+                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+filteredResults[i].number+"' class='nodeco'><h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2></a><div><a href='./?cat="+filteredResults[i].labels[0].name+"' class='nodeco'><span class='category' style='background-color: #"+filteredResults[i].labels[0].color+"; color: white;'>"+filteredResults[i].labels[0].name+"</span></a></div><div class='description'>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div><div class='datetime'>"+filteredResults[i].created_at+"</div>"
             } else {
-                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+results[i].number+"' class='nodeco'><h2>"+results[i].title+" ("+results[i].comments+")</h2></a><div class='description'>"+parsePlainText(results[i].body).substr(0, 100)+"...</div><div class='datetime'>"+results[i].created_at+"</div>"
+                document.querySelector("#post"+i).innerHTML += "<a href='./?a="+filteredResults[i].number+"' class='nodeco'><h2>"+filteredResults[i].title+" ("+filteredResults[i].comments+")</h2></a><div class='description'>"+parsePlainText(filteredResults[i].body).substr(0, 100)+"...</div><div class='datetime'>"+filteredResults[i].created_at+"</div>"
             }
         }
     })
@@ -297,9 +306,11 @@ if (!page && !category && !article) {
         var results = JSON.parse(out)
 
         function isInCategory(result) {
-            if (result.labels.length > 0) {
-                if (result.labels[0].name == category) {
-                    return true
+            if (result.user.login == githubUserName) {
+                if (result.labels.length > 0) {
+                    if (result.labels[0].name == category) {
+                        return true
+                    }
                 }
             }
         }
