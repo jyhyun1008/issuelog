@@ -276,7 +276,8 @@ if (!page && !category && !article) {
                 client_secret: clientSecret1+clientSecret2+clientSecret3,
                 code: code,
                 redirect_uri: domain,
-            })
+            }),
+            mode: "no-cors"
         }
         fetch(postUrl, postParam)
         .then((tokenData) => {return tokenData.json()})
