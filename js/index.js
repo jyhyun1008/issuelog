@@ -1,3 +1,4 @@
+const sessionId = localStorage.getItem("sessionId");
 
 var cssRoot = document.querySelector(':root');
 cssRoot.style.setProperty('--accent', accentColor)
@@ -248,8 +249,13 @@ var page = qs.p;
 var category = qs.cat;
 var article = qs.a;
 var index = qs.index;
+var code = qs.code;
+var access_token = qs.access_token;
 
 if (!page && !category && !article) {
+    if (access_token) {
+        localStorage.setItem('sessionId', access_token)
+    }
     var url = "https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/README.md"
     fetch(url)
     .then(res => res.text())
@@ -257,6 +263,26 @@ if (!page && !category && !article) {
         document.querySelector("#page_title").innerText = 'HOME'
         document.querySelector("#page_content").innerHTML += parseMd(out)
     })
+} else if (page == 'callback') {
+    if (!sessionId) {
+        var postUrl = 'https://github.com/login/oauth/access_token'
+        var postParam = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                client_id: '25e131ad6a67fcf315fa',
+                client_secret: clientSecret1+clientSecret2+clientSecret3,
+                code: code,
+                redirect_uri: domain,
+            })
+        }
+        fetch(postUrl, postParam)
+        .then((tokenData) => {return tokenData.json()})
+        .then((tokenRes) => {
+        })
+    }
 } else if (page == 'blog') {
     var url = "https://api.github.com/repos/"+githubUserName+"/"+githubRepoName+"/issues"
     fetch(url)
