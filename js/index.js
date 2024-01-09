@@ -266,7 +266,7 @@ if (!page && !category && !article) {
 } else if (page == 'callback') {
     if (!sessionId) {
         var postUrl = 'https://github.com/login/oauth/access_token?client_id='+clientId+'&client_secret='+clientSecret1+clientSecret2+clientSecret3+'&code='+code+'&redirect_uri='+domain
-        fetch(postUrl)
+        fetch(postUrl, {mode: "no-cors"})
         .then((tokenData) => {tokenData.text()})
         .then((tokenRes) => {
             location.href = './?'+tokenRes
