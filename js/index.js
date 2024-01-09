@@ -365,6 +365,11 @@ if (!page && !category && !article) {
         .then(commentRes => commentRes.text())
         .then((commentOut) => {
             var commentResult = JSON.parse(commentOut)
+            if (sessionId) {
+
+            } else {
+                document.querySelector("#blogcomments").innerHTML += "<div class='commentlist'>덧글을 작성하시려면, <a href='"+signinUrl+"'>GitHub를 사용해서 로그인</a>해 주세요.</div>"
+            }
             for (let i = 0; i < commentResult.length; i++) {
                 document.querySelector("#blogcomments").innerHTML += "<div class='commentlist'><div class='userinfo'><img class='profileimage' src='"+commentResult[i].user.avatar_url+"'><span> "+commentResult[i].user.login+"</span></div><div class='comment'>"+parseMd(commentResult[i].body)+"<div></div>"
             }
