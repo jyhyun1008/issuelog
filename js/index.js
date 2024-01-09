@@ -268,7 +268,6 @@ if (!page && !category && !article) {
         var postUrl = 'https://github.com/login/oauth/access_token'
         var postParam = {
             method: 'POST',
-            credentials: "include",
             headers: {
                 accept: 'application/json',
             },
