@@ -96,3 +96,20 @@ body {
 .postimage {
     border-radius: 10px;
 }
+
+#blogbody {
+    padding: 40px 0;
+    border-bottom: var(--bg) solid 1px;
+}
+
+.commentlist {
+    padding: 40px 0;
+    border-bottom: var(--bg) solid 1px;
+}
+
+.profileimage {
+    width: 20px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+}

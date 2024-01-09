@@ -332,10 +332,17 @@ if (!page && !category && !article) {
         var result = JSON.parse(out)
         document.querySelector("#page_title").innerText = result.title
 
-        console.log(result)
-
         document.querySelector("#page_content").innerHTML += "<div><a href='./?cat="+result.labels[0].name+"' class='nodeco'><span class='category' style='background-color: #"+result.labels[0].color+"; color: white;'>"+result.labels[0].name+"</span></a></div><div><p></p></div><div class='datetime'>"+result.created_at+"</div><div id='blogbody'></div><div id='blogcomments'></div>"
         document.querySelector("#blogbody").innerHTML += parseMd(result.body)
+        var commentUrl = "https://api.github.com/repos/jyhyun1008/issuelog/issues/1/comments"
+        fetch(commentUrl)
+        .then(commentRes => commentRes.text())
+        .then((commentOut) => {
+            var commentResult = JSON.parse(commentOut)
+            for (let i = 0; i < commentResult.length; i++) {
+                document.querySelector("#blogcomments").innerHTML += "<div class='commentlist'><div class='userinfo'><img class='profileimage' src='"+commentResult[i].user.avatar_url+"'><span>"+commentResult[i].user.login+"</span></div><div class='comment'>"+parseMd(commentResult[i].body)+"<div></div>"
+            }
+        })
     })
 } else if (page) {
     var url = "https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/pages/"+page+".md"
