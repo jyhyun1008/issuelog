@@ -267,9 +267,9 @@ if (!page && !category && !article) {
     if (!sessionId) {
         var postUrl = 'https://github.com/login/oauth/access_token?client_id='+clientId+'&client_secret='+clientSecret1+clientSecret2+clientSecret3+'&code='+code+'&redirect_uri='+domain
         fetch(postUrl, {mode: "no-cors"})
-        .then((tokenData) => {console.log(tokenData)})
+        .then(tokenData => tokenData.text())
         .then((tokenRes) => {
-            //console.log(tokenRes)
+            console.log(tokenRes)
             //location.href = './?'+tokenRes
         })
     }
