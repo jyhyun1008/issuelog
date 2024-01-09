@@ -265,24 +265,11 @@ if (!page && !category && !article) {
     })
 } else if (page == 'callback') {
     if (!sessionId) {
-        location.href = 'https://github.com/login/oauth/access_token?client_id='+clientId+'&client_secret='+clientSecret1+clientSecret2+clientSecret3+'&code='+code+'&redirect_uri='+domain
-        var postUrl = 'https://github.com/login/oauth/access_token'
-        var postParam = {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-            },
-            body: JSON.stringify({
-                client_id: clientId,
-                client_secret: clientSecret1+clientSecret2+clientSecret3,
-                code: code,
-                redirect_uri: domain,
-            }),
-            mode: "no-cors"
-        }
-        fetch(postUrl, postParam)
-        .then((tokenData) => {return tokenData.json()})
+        var postUrl = 'https://github.com/login/oauth/access_token?client_id='+clientId+'&client_secret='+clientSecret1+clientSecret2+clientSecret3+'&code='+code+'&redirect_uri='+domain
+        fetch(postUrl)
+        .then((tokenData) => {tokenData.text()})
         .then((tokenRes) => {
+            location.href = './?'+tokenRes
         })
     }
 } else if (page == 'blog') {
