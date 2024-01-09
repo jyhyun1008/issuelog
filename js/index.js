@@ -269,7 +269,8 @@ if (!page && !category && !article) {
         fetch(postUrl, {mode: "no-cors"})
         .then((tokenData) => {tokenData.text()})
         .then((tokenRes) => {
-            location.href = './?'+tokenRes
+            console.log(tokenRes)
+            //location.href = './?'+tokenRes
         })
     }
 } else if (page == 'blog') {
