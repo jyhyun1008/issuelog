@@ -265,6 +265,7 @@ if (!page && !category && !article) {
     })
 } else if (page == 'callback') {
     if (!sessionId) {
+        location.href('https://github.com/login/oauth/access_token?client_id='+clientId+'&client_secret='+clientSecret1+clientSecret2+clientSecret3+'&code='+code+'&redirect_uri='+domain)
         var postUrl = 'https://github.com/login/oauth/access_token'
         var postParam = {
             method: 'POST',
