@@ -270,15 +270,14 @@ if (!page && !category && !article) {
             method: 'POST',
             credentials: "include",
             headers: {
-                'content-type': 'application/json',
+                accept: 'application/json',
             },
             body: JSON.stringify({
                 client_id: clientId,
                 client_secret: clientSecret1+clientSecret2+clientSecret3,
                 code: code,
                 redirect_uri: domain,
-            }),
-            mode: "no-cors"
+            })
         }
         fetch(postUrl, postParam)
         .then((tokenData) => {return tokenData.json()})
