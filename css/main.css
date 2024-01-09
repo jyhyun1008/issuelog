@@ -76,7 +76,7 @@ body {
 
 .width200 {
     width: 200px;
-    max-width: 20%;
+    max-width: 20vw;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 10px;
