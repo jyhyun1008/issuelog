@@ -107,6 +107,11 @@ body {
     border-bottom: var(--bg) solid 1px;
 }
 
+.userinfo {
+    display: flex;
+    align-items: center;
+}
+
 .profileimage {
     width: 20px;
     aspect-ratio: 1 / 1;

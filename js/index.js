@@ -340,7 +340,7 @@ if (!page && !category && !article) {
         .then((commentOut) => {
             var commentResult = JSON.parse(commentOut)
             for (let i = 0; i < commentResult.length; i++) {
-                document.querySelector("#blogcomments").innerHTML += "<div class='commentlist'><div class='userinfo'><img class='profileimage' src='"+commentResult[i].user.avatar_url+"'><span>"+commentResult[i].user.login+"</span></div><div class='comment'>"+parseMd(commentResult[i].body)+"<div></div>"
+                document.querySelector("#blogcomments").innerHTML += "<div class='commentlist'><div class='userinfo'><img class='profileimage' src='"+commentResult[i].user.avatar_url+"'><span> "+commentResult[i].user.login+"</span></div><div class='comment'>"+parseMd(commentResult[i].body)+"<div></div>"
             }
         })
     })
